@@ -4,8 +4,7 @@ class Renderer {
     }
 
     renderData(cities) {
-        const newHTML = this.expensesTemplate({city: cities});
-        $('#sub-container').empty();
-        $('#sub-container').append(newHTML);
+        const newHTML = this.citiesTemplate({city: cities});
+        $('#results').empty().append(newHTML);
     }
 }
