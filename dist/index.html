@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lora|Sriracha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Weather App</title>
 </head>
@@ -25,8 +26,8 @@
                 {{else}}
                 <i class="fas fa-plus-circle save"></i>
                 {{/if}}
-                <div class="temp-loc">{{temperature}}° C<br>{{name}}</div>
-                <div class="condition"><img src="{{conditionPic}}"><br>{{condition}}</div>
+                <div class="temp-loc"><h2>{{temperature}} °</h2><p>{{name}}</p></div>
+                <div class="condition"><img src="{{conditionPic}}"><p>{{condition}}</p></div>
             </div>
         {{/each}}
     </script>
