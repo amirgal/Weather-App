@@ -19,21 +19,19 @@ class WeatherManager {
         }
     }
 
-    async saveCity(city) {
+    async saveCity(city, cityIndex) {
         await $.post('/city', city)
+        this.cityData[cityIndex].saved = true
         console.log(`saved ${city.name}`)
     }
 
-    async removeCity(cityName) {
+    async removeCity(cityName, cityIndex) {
         await $.ajax({
             url:`/city/${cityName}`,
             type: 'DELETE',
         })
+        this.cityData.splice(cityIndex,1)
         console.log(`deleted ${cityName}`)
-    }
-
-    updateCityStatus(cityIndex) {
-        this.cityData[cityIndex].saved = !this.cityData[cityIndex].saved
     }
 
 }
