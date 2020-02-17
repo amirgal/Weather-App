@@ -7,21 +7,21 @@ class WeatherManager {
         const cities = await $.get('/cities')
 
         cities.forEach(city => {
-            city.icon = "fas fa-minus-circle"
-            this.cityData.push(city)})
+            city.saved = true
+            this.cityData.unshift(city)})
     }
 
     async getCityData(cityName) {
         const city = await $.get(`/city/${cityName}`)
         if(!this.cityData.some(c => c.name === cityName)){
-            city.icon = "fas fa-plus-circle"
+            city.saved = false
             this.cityData.unshift(city)
         }
     }
 
     async saveCity(city) {
         await $.post('/city', city)
-        console.log(`saved ${city.cityName}`)
+        console.log(`saved ${city.name}`)
     }
 
     async removeCity(cityName) {
@@ -30,7 +30,10 @@ class WeatherManager {
             type: 'DELETE',
         })
         console.log(`deleted ${cityName}`)
-        
+    }
+
+    updateCityStatus(cityIndex) {
+        this.cityData[cityIndex].saved = !this.cityData[cityIndex].saved
     }
 
 }
