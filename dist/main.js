@@ -19,13 +19,13 @@ $('#search-icon').on('click', function() {
 $('#results').on('click','.save', async function() {
     const cityName = $(this).closest('.city').data().name
     const cityIndex = weatherManager.cityData.findIndex(c => c.name === cityName)
-    weatherManager.updateCityStatus(cityIndex)
-    await weatherManager.saveCity(weatherManager.cityData[cityIndex])
+    await weatherManager.saveCity(weatherManager.cityData[cityIndex], cityIndex)
     renderer.renderData(weatherManager.cityData)
 })
 
 $('#results').on('click','.delete', async function() {
     const cityName = $(this).closest('.city').data().name
-    await weatherManager.removeCity(cityName)
-
+    const cityIndex = weatherManager.cityData.findIndex(c => c.name === cityName)
+    await weatherManager.removeCity(cityName, cityIndex)
+    renderer.renderData(weatherManager.cityData)
 })
