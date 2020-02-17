@@ -16,4 +16,16 @@ $('#search-icon').on('click', function() {
     handleSearch($('#input').val())
 })
 
+$('#results').on('click','.save', async function() {
+    const cityName = $(this).closest('.city').data().name
+    const cityIndex = weatherManager.cityData.findIndex(c => c.name === cityName)
+    weatherManager.updateCityStatus(cityIndex)
+    await weatherManager.saveCity(weatherManager.cityData[cityIndex])
+    renderer.renderData(weatherManager.cityData)
+})
 
+$('#results').on('click','.delete', async function() {
+    const cityName = $(this).closest('.city').data().name
+    await weatherManager.removeCity(cityName)
+
+})

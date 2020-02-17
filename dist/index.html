@@ -20,7 +20,11 @@
     <script id="cities-template" type="text/x-handlebars">
         {{#each city}}
             <div class="city" data-name="{{name}}">
-                <i class="{{icon}}"></i>
+                {{#if saved}}
+                <i class="fas fa-minus-circle delete"></i>
+                {{else}}
+                <i class="fas fa-plus-circle save"></i>
+                {{/if}}
                 <div class="temp-loc">{{temperature}}<br>{{name}}</div>
                 <div class="condition"><img src="{{conditionPic}}"><br>{{condition}}</div>
             </div>
