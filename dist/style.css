@@ -34,17 +34,29 @@ input {
 }
 
 #results {
-    display: grid;
-    grid-template-rows: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .city {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid black;
+    color: white;
 }
 
 .fa-search {
     font-size: 20px;
     margin-right: 5px;
+}
+
+.delete {
+    color: darkred;
+}
+
+.save {
+    color: green;
 }
