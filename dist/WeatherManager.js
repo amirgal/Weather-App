@@ -5,12 +5,18 @@ class WeatherManager {
 
     async getDataFromDB() {
         const cities = await $.get('/cities')
-        cities.forEach(city => this.cityData.push(city))
+
+        cities.forEach(city => {
+            city.icon = "fas fa-minus-circle"
+            this.cityData.push(city)})
     }
 
     async getCityData(cityName) {
         const city = await $.get(`/city/${cityName}`)
-        this.cityData.unshift(city)
+        if(!this.cityData.some(c => c.name === cityName)){
+            city.icon = "fas fa-plus-circle"
+            this.cityData.unshift(city)
+        }
     }
 
     async saveCity(city) {
