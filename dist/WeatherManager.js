@@ -9,8 +9,8 @@ class WeatherManager {
     }
 
     async getCityData(cityName) {
-        const city = await $get(`/city/${cityName}`)
-        this.cityData.push(city)
+        const city = await $.get(`/city/${cityName}`)
+        this.cityData.unshift(city)
     }
 
     async saveCity(city) {
