@@ -4,7 +4,7 @@ const path = require('path')
 const api = require('./server/routes/api')
 const app = express()
 const mongoose = require('mongoose')
-mongoose.connect("mongodb://localhost/weather_db-", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb://localhost/weather_db", { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))

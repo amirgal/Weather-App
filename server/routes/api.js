@@ -24,16 +24,19 @@ router.get('/cities', async (req,res) => {
     res.send(cities)
 })
 
-router.delete('/city/:cityName', (req,res) => {
-    const {cityName} = req.params
-    City.findByIdAndDelete({name: cityName}).then(res.end())
+router.post('/city', async (req,res) => {
+    const newCity = new City(req.body)
+    if((await City.find({name: newCity.name})).length == 0) {
+        await newCity.save()
+    }
+    res.end()
 })
 
-router.post('/city', (req,res) => {
-    const city = req.body
-    const newCity = new City(city)
-    newCity.save().then(res.end())
+router.delete('/city/:cityName', (req,res) => {
+    const {cityName} = req.params
+    City.findOneAndDelete({name: cityName}).then(res.end())
 })
+
 
 
 
