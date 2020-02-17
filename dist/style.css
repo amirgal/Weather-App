@@ -9,6 +9,8 @@ body {
     min-height: 100vh;
     width: 100vw;
     background-color: lightskyblue;
+    background-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?ixlib=rb-1.2.1&w=1000&q=80');
+    background-size: cover;
 }
 
 #search-bar {
@@ -45,7 +47,8 @@ input {
     align-items: center;
     text-align: center;
     box-shadow: 1px 1px 3px black;
-    background-color: #7fabf9;
+    /* background-color: #7fabf9; */
+    background:rgba(0,0,0,0.2);
     color: white;
     width: 95%;
     align-self: center;
