@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-// const request = require('request')
 const axios = require('axios')
 const City = require('../models/City')
 
@@ -18,6 +17,22 @@ router.get('/city/:cityName', async (req,res) => {
     let data = await fetchApi(url)
     data = {name: data.name, temperature: data.main.temp, condition: data.weather[0].description, conditionPic: picUrl}
     res.send(data)
+})
+
+router.get('/cities', async (req,res) => {
+    const cities = await City.find({})
+    res.send(cities)
+})
+
+router.delete('/city/:cityName', (req,res) => {
+    const {cityName} = req.params
+    City.findByIdAndDelete({name: cityName}).then(res.end())
+})
+
+router.post('/city', (req,res) => {
+    const city = req.body
+    const newCity = new City(city)
+    newCity.save().then(res.end())
 })
 
 
