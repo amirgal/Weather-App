@@ -13,9 +13,9 @@ const fetchApi = async function(url) {
 router.get('/city/:cityName', async (req,res) => {
     const {cityName} = req.params
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${api_key}&units=metric`
-    let data = await fetchApi(url)
-    data = {name: data.name, temperature: data.main.temp, condition: data.weather[0].description, conditionPic: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
-    res.send(data)
+    const data = await fetchApi(url)
+    const city = {name: data.name, temperature: data.main.temp, condition: data.weather[0].description, conditionPic: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+    res.send(city)
 })
 
 router.get('/cities', async (req,res) => {
