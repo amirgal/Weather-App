@@ -6,7 +6,6 @@ class LocationManager {
         if(navigator.geolocation) {
            const options = {timeout:30000}
            const position = await this.locationPromise(options)
-           console.log(position);
            return position
            
         } else {
