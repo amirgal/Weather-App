@@ -3,9 +3,10 @@ const renderer = new Renderer()
 
 
 const loadPage = async () => {
-    getLocation()
+    await getLocation()
     await weatherManager.getDataFromDB()
     renderer.renderData(weatherManager.cityData)
+    renderer.renderMainCity(weatherManager.mainCity)
 }
 
 
@@ -56,8 +57,8 @@ async function showLocation(position) {
         lat: position.coords.latitude,
         lng: position.coords.longitude
     }
-    await weatherManager.getCityData(location)
-    renderer.renderData(weatherManager.cityData)
+    await weatherManager.getLocationData(location)
+    // renderer.renderMainCity(weatherManager.mainCity)
  }
 
  function errorHandler(err) {
