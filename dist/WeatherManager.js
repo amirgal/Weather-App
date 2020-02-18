@@ -20,9 +20,13 @@ class WeatherManager {
 
     async getCityData(location) {
         const city = await $.get(`/city/?cityName=${location}`)
-        if(!this.cityData.some(c => c.name === city.name)){
-            city.saved = false
-            this.cityData.unshift(city)
+        if (typeof city == 'string') {
+            console.log(city);
+        } else {
+            if (!this.cityData.some(c => c.name === city.name)){
+                city.saved = false
+                this.cityData.unshift(city)
+            }
         }
     }
 
