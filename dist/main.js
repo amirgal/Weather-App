@@ -8,8 +8,10 @@ const loadPage = async () => {
 loadPage()
 
 const handleSearch = async cityName => {
-    await weatherManager.getCityData(cityName)
-    renderer.renderData(weatherManager.cityData)
+    if(cityName.length > 0) {
+        await weatherManager.getCityData(cityName)
+        renderer.renderData(weatherManager.cityData)
+    }
 }
 
 $('#search-icon').on('click', function() {
