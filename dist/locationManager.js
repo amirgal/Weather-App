@@ -1,6 +1,5 @@
 class LocationManager {
     constructor(){
-
     }
     async getLocation() {
         if(navigator.geolocation) {
