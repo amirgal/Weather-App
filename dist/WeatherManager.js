@@ -22,7 +22,6 @@ class WeatherManager {
     async saveCity(city, cityIndex) {
         await $.post('/city', city)
         this.cityData[cityIndex].saved = true
-        console.log(`saved ${city.name}`)
     }
 
     async removeCity(cityName, cityIndex) {
@@ -31,7 +30,6 @@ class WeatherManager {
             type: 'DELETE',
         })
         this.cityData.splice(cityIndex,1)
-        console.log(`deleted ${cityName}`)
     }
 
 }

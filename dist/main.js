@@ -18,6 +18,14 @@ $('#search-icon').on('click', function() {
     handleSearch($('#input').val())
 })
 
+$('#input').keypress(event => {
+    const keycode = (event.keyCode ? event.keyCode : event.which)
+    if(keycode == '13'){
+        handleSearch($('#input').val())
+    }
+    event.stopPropagation();
+})
+
 $('#results').on('click','.save', async function() {
     const cityName = $(this).closest('.city').data().name
     const cityIndex = weatherManager.cityData.findIndex(c => c.name === cityName)
