@@ -14,10 +14,20 @@ const fetchApi = async function(url) {
     }
 }
 
-router.get('/city/:cityName', async (req,res) => {
-    const {cityName} = req.params
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${api_key}&units=metric`
-    const data = await fetchApi(url)
+const fetchUrl = query => {
+    const {lat,lng} = query
+    const {cityName} = query
+    let url = ''
+    if(lat && lng) {
+        url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${api_key}&units=metric`
+    } else {
+        url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${api_key}&units=metric`
+    }
+    return url
+}
+
+router.get('/city/', async (req,res) => {
+    const data = await fetchApi(fetchUrl(req.query))
     const city = {name: data.name, temperature: Math.round(data.main.temp*10)/10, condition: data.weather[0].description, conditionPic: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
     res.send(city)
 })

@@ -1,16 +1,18 @@
 const weatherManager = new WeatherManager()
 const renderer = new Renderer()
 
+
 const loadPage = async () => {
+    getLocation()
     await weatherManager.getDataFromDB()
     renderer.renderData(weatherManager.cityData)
 }
-loadPage()
+
 
 const handleSearch = async cityName => {
     if(cityName.length > 0) {
-        await weatherManager.getCityData(cityName)
-        renderer.renderData(weatherManager.cityData)
+            await weatherManager.getCityData(cityName)
+            renderer.renderData(weatherManager.cityData)
     }
 }
 
@@ -39,3 +41,31 @@ $('#results').on('click','.delete', async function() {
     await weatherManager.removeCity(cityName, cityIndex)
     renderer.renderData(weatherManager.cityData)
 })
+
+ function getLocation() {
+    if(navigator.geolocation) {
+       const options = {timeout:30000}
+       navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options)
+    } else {
+       console.log("browser does not support geolocation!")
+    }
+ }
+
+async function showLocation(position) {
+    const location = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+    }
+    await weatherManager.getCityData(location)
+    renderer.renderData(weatherManager.cityData)
+ }
+
+ function errorHandler(err) {
+    if(err.code == 1) {
+       console.log("geolocation Error: Access is denied!");
+    } else if( err.code == 2) {
+        console.log("geolocation Error: Position is unavailable!");
+    }
+ }
+
+loadPage()
