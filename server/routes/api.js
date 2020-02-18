@@ -6,8 +6,12 @@ const City = require('../models/City')
 const api_key = 'f6814165c4f652c516ae54a25bab866b'
 
 const fetchApi = async function(url) {
-    const result = await axios.get(url)
-    return result.data   
+    try{
+        const result = await axios.get(url)
+        return result.data   
+    } catch(error) {
+        console.error(error)
+    }
 }
 
 router.get('/city/:cityName', async (req,res) => {
