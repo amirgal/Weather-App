@@ -3,10 +3,10 @@ const renderer = new Renderer()
 
 
 const loadPage = async () => {
-    await getLocation()
+    await getLocation()    
     await weatherManager.getDataFromDB()
-    renderer.renderData(weatherManager.cityData)
     renderer.renderMainCity(weatherManager.mainCity)
+    renderer.renderData(weatherManager.cityData)
 }
 
 
@@ -43,30 +43,37 @@ $('#results').on('click','.delete', async function() {
     renderer.renderData(weatherManager.cityData)
 })
 
- function getLocation() {
+ async function getLocation() {
     if(navigator.geolocation) {
        const options = {timeout:30000}
-       navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options)
+       const position = await locationPromise(options)
+       await weatherManager.getLocationData(position)
+       console.log(position);
+       
     } else {
        console.log("browser does not support geolocation!")
     }
  }
 
-async function showLocation(position) {
-    const location = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-    }
-    await weatherManager.getLocationData(location)
-    // renderer.renderMainCity(weatherManager.mainCity)
- }
-
- function errorHandler(err) {
-    if(err.code == 1) {
-       console.log("geolocation Error: Access is denied!");
-    } else if( err.code == 2) {
-        console.log("geolocation Error: Position is unavailable!");
-    }
+ function locationPromise(options) {
+     const promise = new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const location = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            }
+            resolve(location)
+        }, function(err) {
+            let errMessage;
+            if(err.code == 1) {
+                errMessage = "geolocation Error: Access is denied!"
+             } else if( err.code == 2) {
+                errMessage = "geolocation Error: Position is unavailable!"
+             }
+            reject(errMessage)
+        }, options)
+     })
+     return promise;
  }
 
 loadPage()
