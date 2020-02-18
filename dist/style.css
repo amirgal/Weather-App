@@ -1,38 +1,28 @@
 body {
     margin: 0;
-    /* display: grid;
-    grid-template-rows: 60px 100px 5fr; */
     display: flex;
     flex-direction: column;
-    height: 100%;
-    min-height: 100vh;
     width: 100vw;
     background-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?ixlib=rb-1.2.1&w=1000&q=80');
+    /* background-image: url('https://images.unsplash.com/photo-1505322022379-7c3353ee6291?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'); */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-/* #container {
-    display: grid;
-    grid-template-rows: 60px 100px 5fr;
-    height: 100%;
-    min-height: 100vh;
-    width: 100vw;
-    background-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?ixlib=rb-1.2.1&w=1000&q=80');
-    background-size: cover;
-} */
 
 #search-bar {
     display: flex;
-    margin: 5px;
+    position: fixed;
+    left: 8px;
+    margin: 8px;
     padding: 5px;
     height: 30px;
     width: 90%;
     justify-self: center;
     align-self: center;
-    opacity: 0.8;
+    z-index: 1;
     background-color: white;
     border-radius: 20px;
     align-items: center;
@@ -50,6 +40,7 @@ input {
 #mainCity {
     display: flex;
     flex-direction: column;
+    margin-top: 58px;
 }
 
 #results {
@@ -59,8 +50,7 @@ input {
 
 .city {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    justify-items: center;
+    grid-template-columns: 1fr 3fr 3fr;
     align-items: center;
     text-align: center;
     box-shadow: 1px 1px 3px black;

@@ -21,12 +21,14 @@ const handleSearch = async cityName => {
 
 $('#search-icon').on('click', function() {
     handleSearch($('#input').val())
+    $('input').val('')
 })
 
 $('#input').keypress(event => {
     const keycode = (event.keyCode ? event.keyCode : event.which)
     if(keycode == '13'){
         handleSearch($('#input').val())
+        $('input').val('')
     }
     event.stopPropagation();
 })

@@ -10,7 +10,7 @@ const fetchApi = async function(url) {
         const result = await axios.get(url)
         return result.data   
     } catch(error) {
-        console.error(error.data)
+        console.error(error.response.data)
     }
 }
 
@@ -28,8 +28,12 @@ const fetchUrl = query => {
 
 router.get('/city/', async (req,res) => {
     const data = await fetchApi(fetchUrl(req.query))
-    const city = {name: data.name, temperature: Math.round(data.main.temp*10)/10, condition: data.weather[0].description, conditionPic: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
-    res.send(city)
+    if(data) {
+        const city = {name: data.name, temperature: Math.round(data.main.temp*10)/10, condition: data.weather[0].description, conditionPic: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+        res.send(city)
+    }else{
+        res.send('Cannot find city by that name!')
+    }
 })
 
 router.get('/cities', async (req,res) => {
