@@ -1,7 +1,7 @@
 class WeatherManager {
     constructor() {
         this.cityData =[]
-        this.userCity = {}
+        this.mainCity = {}
     }
 
     async getDataFromDB() {
@@ -12,13 +12,13 @@ class WeatherManager {
             this.cityData.unshift(city)})
     }
 
+    async getLocationData(location) {
+        const mainCity = await $.get(`/city/?lat=${location.lat}&lng=${location.lng}`)
+        this.mainCity = mainCity
+        
+    }
+
     async getCityData(location) {
-        if(typeof location == "object") {
-            const userCity = await $.get(`/city/?lat=${location.lat}&lng=${location.lng}`)
-            // this.userCity = userCity
-            this.cityData.unshift(userCity)
-            return
-        }
         const city = await $.get(`/city/?cityName=${location}`)
         if(!this.cityData.some(c => c.name === city.name)){
             city.saved = false

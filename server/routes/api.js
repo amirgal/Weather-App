@@ -10,7 +10,7 @@ const fetchApi = async function(url) {
         const result = await axios.get(url)
         return result.data   
     } catch(error) {
-        console.error(error)
+        console.error(error.data)
     }
 }
 
