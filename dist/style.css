@@ -15,7 +15,7 @@ body {
 #search-bar {
     display: flex;
     position: fixed;
-    left: 8px;
+    left: 5px;
     margin: 8px;
     padding: 5px;
     height: 30px;
