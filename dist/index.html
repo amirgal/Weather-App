@@ -18,11 +18,12 @@
     <div id="results"></div>
     
     <script id="mainCity-template" type="text/x-handlebars">
-            <div class="city" data-name="{{name}}">
+            <div id="userCityData" data-name="{{name}}">
                 <i class="fas fa-home"></i>
                 <div class="temp-loc"><h2>{{temperature}} °</h2><p>{{name}}</p></div>
                 <div class="condition"><img src="{{conditionPic}}"><p>{{condition}}</p></div>
             </div>
+            <h3 id="date">{{date}} {{time}}</h3>
     </script>
 
     <script id="cities-template" type="text/x-handlebars">
@@ -43,6 +44,7 @@
 
     <script src="./handlebars/dist/handlebars.js"></script>
     <script src="./jquery/dist/jquery.js"></script>
+    <script src="ImageGen.js"></script>
     <script src="locationManager.js"></script>
     <script src="WeatherManager.js"></script>
     <script src="Renderer.js"></script>

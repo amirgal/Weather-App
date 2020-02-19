@@ -15,7 +15,9 @@ class WeatherManager {
     async getLocationData(location) {
         const mainCity = await $.get(`/city/?lat=${location.lat}&lng=${location.lng}`)
         this.mainCity = mainCity
-        
+        const date = new Date()
+        this.mainCity.date = date.toLocaleDateString()
+        this.mainCity.time = date.toLocaleTimeString()
     }
 
     async getCityData(location) {
