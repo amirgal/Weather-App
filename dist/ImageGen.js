@@ -13,6 +13,10 @@ class ImageGen {
     }
     getConditionImage(condition) {
         condition = condition.toLowerCase()
-        return `url(${this.images[condition]})` || `url(${this.images.default})`
+        if(this.images[condition]) {
+            return `url(${this.images[condition]})`
+        } else {
+            return `url(${this.images.default})`
+        }
     }
 }
