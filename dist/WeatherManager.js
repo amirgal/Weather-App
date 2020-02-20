@@ -52,7 +52,7 @@ class WeatherManager {
             type: 'PUT',
             data: updatedCity
         })
-        updatedCity.saved = this.cityData[cityIndex].saved ? true : false
+        updatedCity.saved = this.cityData[cityIndex].saved
         this.cityData.splice(cityIndex, 1, updatedCity)
     }
 
