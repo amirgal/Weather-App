@@ -49,4 +49,11 @@ $('#results').on('click','.delete', async function() {
     renderer.renderData(weatherManager.cityData)
 })
 
+$('#results').on('click','.refresh', async function() {
+    const cityName = $(this).closest('.city').data().name
+    const cityIndex = weatherManager.cityData.findIndex(c => c.name === cityName)
+    await weatherManager.updateCity(cityName, cityIndex)
+    renderer.renderData(weatherManager.cityData)
+})
+
 loadPage()

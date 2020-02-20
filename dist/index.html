@@ -19,7 +19,7 @@
     
     <script id="mainCity-template" type="text/x-handlebars">
             <div id="userCityData" data-name="{{name}}">
-                <i class="fas fa-home"></i>
+                    <i class="fas fa-home"></i>
                 <div class="temp-loc"><h2>{{temperature}} °</h2><p>{{name}}</p></div>
                 <div class="condition"><img src="{{conditionPic}}"><p>{{condition}}</p></div>
             </div>
@@ -29,11 +29,14 @@
     <script id="cities-template" type="text/x-handlebars">
         {{#each city}}
             <div class="city" data-name="{{name}}">
-                {{#if saved}}
-                <i class="fas fa-minus-circle delete"></i>
-                {{else}}
-                <i class="fas fa-plus-circle save"></i>
-                {{/if}}
+                <div class='icons'>
+                    {{#if saved}}
+                    <i class="fas fa-minus-circle delete"></i>
+                    {{else}}
+                    <i class="fas fa-plus-circle save"></i>
+                    {{/if}}
+                    <i class="fas fa-redo-alt refresh"></i>
+                </div>
                 <div class="temp-loc"><h2>{{temperature}} °</h2><p>{{name}}</p></div>
                 <div class="condition"><img src="{{conditionPic}}"><p>{{condition}}</p></div>
             </div>

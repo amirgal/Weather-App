@@ -54,8 +54,11 @@ router.delete('/city/:cityName', (req,res) => {
     City.findOneAndDelete({name: cityName}).then(res.end())
 })
 
-
-
+router.put('/city/:cityName', (req,res) => {
+    const {cityName} = req.params
+    const updatedCity = req.body
+    City.findOneAndUpdate({name: cityName}, updatedCity).then(res.end())
+})
 
 
 module.exports = router

@@ -118,3 +118,12 @@ img{
     position: relative;
     bottom: 15px;
 }
+
+.icons {
+    display: flex;
+    flex-direction: column;
+}
+
+.refresh {
+    margin-top: 10px;
+}
