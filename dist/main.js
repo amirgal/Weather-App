@@ -3,6 +3,7 @@ const renderer = new Renderer()
 const locationManager = new LocationManager()
 const imageGen = new ImageGen()
 
+const cities = weatherManager.cityData
 
 const loadPage = async () => {  
     const location = await locationManager.getLocation()
@@ -10,14 +11,14 @@ const loadPage = async () => {
     await weatherManager.getDataFromDB()
     $('body').css('background-image',imageGen.getConditionImage(weatherManager.mainCity.description))
     renderer.renderMainCity(weatherManager.mainCity)
-    renderer.renderData(weatherManager.cityData)
+    renderer.renderData(cities)
 }
 
 
 const handleSearch = async cityName => {
     if(cityName.length > 0) {
             await weatherManager.getCityData(cityName)
-            renderer.renderData(weatherManager.cityData)
+            renderer.renderData(cities)
     }
 }
 
@@ -37,16 +38,23 @@ $('#input').keypress(event => {
 
 $('#results').on('click','.save', async function() {
     const cityName = $(this).closest('.city').data().name
-    const cityIndex = weatherManager.cityData.findIndex(c => c.name === cityName)
-    await weatherManager.saveCity(weatherManager.cityData[cityIndex], cityIndex)
-    renderer.renderData(weatherManager.cityData)
+    const cityIndex = cities.findIndex(c => c.name === cityName)
+    await weatherManager.saveCity(cities[cityIndex], cityIndex)
+    renderer.renderData(cities)
 })
 
 $('#results').on('click','.delete', async function() {
     const cityName = $(this).closest('.city').data().name
-    const cityIndex = weatherManager.cityData.findIndex(c => c.name === cityName)
+    const cityIndex = cities.findIndex(c => c.name === cityName)
     await weatherManager.removeCity(cityName, cityIndex)
-    renderer.renderData(weatherManager.cityData)
+    renderer.renderData(cities)
+})
+
+$('#results').on('click','.refresh', async function() {
+    const cityName = $(this).closest('.city').data().name
+    const cityIndex = cities.findIndex(c => c.name === cityName)
+    await weatherManager.updateCity(cityName, cityIndex)
+    renderer.renderData(cities)
 })
 
 loadPage()
