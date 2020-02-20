@@ -45,4 +45,15 @@ class WeatherManager {
         this.cityData.splice(cityIndex,1)
     }
 
+    async updateCity(cityName, cityIndex) {
+        const updatedCity = await $.get(`/city/?cityName=${cityName}`)
+        await $.ajax({
+            url:`/city/${cityName}`,
+            type: 'PUT',
+            data: updatedCity
+        })
+        updatedCity.saved = this.cityData[cityIndex].saved
+        this.cityData.splice(cityIndex, 1, updatedCity)
+    }
+
 }
